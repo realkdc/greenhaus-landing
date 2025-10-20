@@ -1,0 +1,126 @@
+--- /tmp/orig_terms.tsx
++++ app/terms/page.tsx
+@@ -10,95 +10,51 @@
+       <h1>Terms of Service</h1>
+       <p className="muted">Last updated: May 5, 2024</p>
+       <section>
+-        <h2>Agreement to terms</h2>
++        <h2>Using GreenHaus</h2>
+         <p>
+-          By creating a GreenHaus account or accessing our mobile app, you agree
+-          to these Terms of Service and our Privacy Policy. If you do not accept
+-          the terms, do not use GreenHaus.
++          By creating an account or accessing the GreenHaus app, you agree to
++          these terms and the Privacy Policy. The service is for adults of legal
++          purchasing age only, and we verify that you are 21+ before unlocking
++          ordering features.
+         </p>
+       </section>
+       <section>
+-        <h2>Eligibility &amp; age verification</h2>
++        <h2>Your responsibilities</h2>
++        <ul>
++          <li>Share accurate information for account setup and age checks.</li>
++          <li>Keep login details secure and notify us if anything looks off.</li>
++          <li>Use the platform for personal, lawful purchases from licensed retailers.</li>
++        </ul>
++      </section>
++      <section>
++        <h2>Ordering with partners</h2>
+         <p>
+-          You must be of legal purchasing age in your jurisdiction (21+ in most
+-          U.S. states) and provide accurate information for verification. We may
+-          deny or suspend access if we cannot confirm your eligibility.
++          GreenHaus connects you with licensed dispensaries. Inventory, pricing,
++          and pickup or delivery windows come directly from those partners. A
++          completed order is an agreement between you and the retailer.
+         </p>
+       </section>
+       <section>
+-        <h2>Account responsibilities</h2>
+-        <ul>
+-          <li>
+-            Keep your login credentials confidential and notify us of any
+-            unauthorized use.
+-          </li>
+-          <li>
+-            Ensure your information stays current, including identification and
+-            payment details.
+-          </li>
+-          <li>
+-            Use GreenHaus only for personal, lawful cannabis purchases from
+-            licensed retailers.
+-          </li>
+-        </ul>
+-      </section>
+-      <section>
+-        <h2>Ordering &amp; fulfillment</h2>
++        <h2>Acceptable conduct</h2>
+         <p>
+-          GreenHaus facilitates orders between you and licensed retail partners.
+-          Inventory, pricing, pickup, and delivery policies are set by each
+-          retailer. A confirmed order is a contract between you and the
+-          retailer, not GreenHaus.
++          We expect respectful, compliant behavior. No attempts to bypass age
++          gates, tamper with the product, or harass dispensary teams. We may
++          limit or end access if policies are violated.
+         </p>
+       </section>
+       <section>
+-        <h2>Acceptable use</h2>
+-        <ul>
+-          <li>No unlawful resale, diversion, or transport across jurisdictional boundaries.</li>
+-          <li>No tampering with the platform, including attempts to bypass age gating.</li>
+-          <li>No abusive, discriminatory, or fraudulent activity toward retailers or staff.</li>
+-        </ul>
+-      </section>
+-      <section>
+-        <h2>Compliance &amp; risk</h2>
++        <h2>Disclaimers</h2>
+         <p>
+-          Cannabis laws differ by location and may change. You are responsible
+-          for understanding and complying with the laws that apply to your
+-          purchase and consumption. GreenHaus provides an informational and
+-          ordering service and does not cultivate, manufacture, or sell
+-          cannabis.
++          We provide GreenHaus “as is.” Cannabis laws shift quickly, and it’s up
++          to you to understand local regulations. We are not liable for indirect
++          or consequential damages tied to the service.
+         </p>
+       </section>
+       <section>
+-        <h2>Disclaimer &amp; limitation of liability</h2>
++        <h2>Changes and contact</h2>
+         <p>
+-          Services are provided on an &ldquo;as is&rdquo; basis. We make no
+-          warranties regarding availability, accuracy, or suitability for a
+-          particular purpose. To the fullest extent permitted by law, GreenHaus
+-          is not liable for indirect, incidental, or consequential damages
+-          arising from your use of the platform.
+-        </p>
+-      </section>
+-      <section>
+-        <h2>Termination</h2>
+-        <p>
+-          We may suspend or terminate access at any time for suspected policy
+-          violations or legal requirements. You may close your account at any
+-          time through the app or by contacting support.
+-        </p>
+-      </section>
+-      <section>
+-        <h2>Changes to these terms</h2>
+-        <p>
+-          We may update these terms to reflect operational or legal changes. We
+-          will notify you of material updates through the app or via email. Your
+-          continued use after the effective date constitutes acceptance.
+-        </p>
+-      </section>
+-      <section>
+-        <h2>Contact</h2>
+-        <p>
+-          For questions about these terms, email{" "}
++          We may update these terms as we launch new features or respond to
++          legal changes. We’ll note the effective date above. Questions? Email{" "}
+           <a href="mailto:indieplantmarketing@gmail.com">
+             indieplantmarketing@gmail.com
+           </a>

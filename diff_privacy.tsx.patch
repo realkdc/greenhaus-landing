@@ -1,0 +1,121 @@
+--- /tmp/orig_privacy.tsx
++++ app/privacy/page.tsx
+@@ -10,94 +10,55 @@
+       <h1>Privacy Policy</h1>
+       <p className="muted">Last updated: May 5, 2024</p>
+       <section>
+-        <h2>Who we are</h2>
++        <h2>How we protect your privacy</h2>
+         <p>
+-          GreenHaus operates a digital platform that connects verified adults
+-          with licensed cannabis retailers. We are committed to protecting your
+-          privacy and handling personal information in compliance with
+-          applicable cannabis and data protection regulations.
+-        </p>
+-      </section>
+-      <section>
+-        <h2>Age restrictions</h2>
+-        <p>
+-          Our services are intended only for adults of legal purchasing age in
+-          their jurisdiction (21+ in most U.S. states). We verify your age
+-          before granting access to menus, ordering, or loyalty features.
++          GreenHaus connects age-verified adults with licensed cannabis
++          retailers. We handle personal information only to deliver that service
++          responsibly and in line with cannabis regulations.
+         </p>
+       </section>
+       <section>
+         <h2>Information we collect</h2>
+-        <p>
+-          We collect the minimum data needed to deliver the GreenHaus experience
+-          and stay compliant. This may include:
+-        </p>
++        <p>We collect just enough to keep the experience safe and compliant:</p>
+         <ul>
+-          <li>Account details such as your name, email, and phone number.</li>
+-          <li>Government-issued ID or selfie used for one-time age verification.</li>
++          <li>Account details used to verify age and secure your profile.</li>
++          <li>Order history and loyalty activity so rewards stack correctly.</li>
+           <li>
+-            Order history, loyalty activity, and messages you exchange with
+-            retail partners.
++            Optional location details to surface nearby pickup and delivery.
+           </li>
+-          <li>
+-            Location data (with permission) to show nearby dispensaries and
+-            confirm delivery eligibility.
+-          </li>
+-          <li>
+-            Device and usage information that helps us secure accounts and
+-            monitor app performance.
+-          </li>
++          <li>Technical diagnostics that help us keep the platform stable.</li>
+         </ul>
+       </section>
+       <section>
+         <h2>How we use information</h2>
+         <ul>
+-          <li>Authenticate your account and maintain legal age compliance.</li>
+-          <li>Fulfill orders, process payments, and deliver customer support.</li>
+-          <li>
+-            Personalize menus, loyalty offers, and marketing communications that
+-            fit your preferences.
+-          </li>
+-          <li>
+-            Analyze anonymized trends to improve retailer operations and keep
+-            the platform secure.
+-          </li>
++          <li>Authenticate 21+ accounts and unlock compliant ordering flows.</li>
++          <li>Personalize menus and offers you actually want to see.</li>
++          <li>Power pickup, delivery, and support conversations with retailers.</li>
++          <li>Review anonymized insights to improve operations and security.</li>
+         </ul>
+       </section>
+       <section>
+-        <h2>Sharing with third parties</h2>
++        <h2>Sharing and retention</h2>
+         <p>
+-          We share personal data only with licensed retail partners, payment and
+-          age-verification providers, and other processors that enable the
+-          services you request. Each partner is contractually required to handle
+-          your data responsibly and only as instructed by GreenHaus.
+-        </p>
+-      </section>
+-      <section>
+-        <h2>Data retention &amp; security</h2>
+-        <p>
+-          We keep personal data only as long as necessary to provide services,
+-          meet legal obligations, and resolve disputes. We employ encryption,
+-          access controls, and routine monitoring to reduce the risk of
+-          unauthorized access.
++          We share data only with licensed retailers and trusted processors that
++          enable payments, age verification, and support. Partners are bound to
++          our privacy standards. Data is retained only as long as required to
++          provide the services or meet legal obligations.
+         </p>
+       </section>
+       <section>
+         <h2>Your choices</h2>
+-        <p>You can:</p>
+-        <ul>
+-          <li>Update or delete your account information from within the app.</li>
+-          <li>Adjust marketing preferences or opt out of promotional emails.</li>
+-          <li>
+-            Request a copy of your data or ask us to delete it, subject to legal
+-            retention requirements.
+-          </li>
+-        </ul>
++        <p>
++          Update, export, or request deletion of your profile from within the
++          GreenHaus app. You can also adjust marketing preferences or opt out of
++          promotional emails at any time.
++        </p>
+       </section>
+       <section>
+         <h2>Contact us</h2>
+         <p>
+-          Questions about this policy? Reach the GreenHaus privacy team at{" "}
++          Have questions? Reach the privacy team at{" "}
+           <a href="mailto:indieplantmarketing@gmail.com">
+             indieplantmarketing@gmail.com
+           </a>

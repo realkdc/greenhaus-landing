@@ -1,0 +1,1036 @@
+--- /tmp/orig_app_layout.tsx
++++ app/layout.tsx
+@@ -1,14 +1,55 @@
+-import type { Metadata } from "next";
++import type { Metadata, Viewport } from "next";
+ import Link from "next/link";
+ import "./globals.css";
+ 
+ export const metadata: Metadata = {
++  metadataBase: new URL("https://greenhaus.app"),
+   title: {
+     default: "GreenHaus",
+-    template: "%s | GreenHaus"
++    template: "%s · GreenHaus"
+   },
+   description:
+-    "GreenHaus connects age-verified customers with compliant cannabis retail experiences."
++    "Verified cannabis retail with rewards that stack, responsible data practices, and express pickup."
++  ,
++  keywords: [
++    "GreenHaus",
++    "cannabis retail",
++    "dispensary app",
++    "age verified cannabis",
++    "express pickup"
++  ],
++  openGraph: {
++    title: "GreenHaus",
++    description:
++      "Verified cannabis retail. Rewards that stack. Pickup in seconds.",
++    url: "/",
++    siteName: "GreenHaus",
++    images: [
++      {
++        url: "/og.png",
++        width: 1200,
++        height: 630,
++        alt: "GreenHaus brand preview"
++      }
++    ],
++    locale: "en_US",
++    type: "website"
++  },
++  twitter: {
++    card: "summary_large_image",
++    title: "GreenHaus",
++    description:
++      "Verified cannabis retail. Rewards that stack. Pickup in seconds.",
++    images: ["/og.png"]
++  },
++  icons: {
++    icon: "/favicon.ico",
++    apple: "/icon.png"
++  }
++};
++
++export const viewport: Viewport = {
++  themeColor: "#0b1927"
+ };
+ 
+ export default function RootLayout({
+@@ -19,8 +60,13 @@
+   return (
+     <html lang="en">
+       <body>
++        <a className="skip-to-content" href="#main-content">
++          Skip to main content
++        </a>
+         <div className="app-shell">
+-          <main className="site-main">{children}</main>
++          <main id="main-content" className="site-main">
++            {children}
++          </main>
+           <footer className="site-footer">
+             <nav aria-label="Legal">
+               <Link href="/privacy">Privacy Policy</Link>
+--- /tmp/orig_app_page.tsx
++++ app/page.tsx
+@@ -1,57 +1,83 @@
+-import Image from "next/image";
++import QR from "../components/QR";
++
++const DOWNLOAD_URL = "#";
++const benefits = [
++  {
++    title: "Age-gated by design",
++    copy:
++      "21+ profiles unlock exclusive offers and express pickup in a secure, compliant flow."
++  },
++  {
++    title: "Data handled responsibly",
++    copy:
++      "Only what’s needed to personalize menus, fulfill orders, and keep you compliant."
++  },
++  {
++    title: "Partners that grow with you",
++    copy:
++      "Insights, operations, and marketing support built for regulated markets."
++  }
++];
+ 
+ export default function HomePage() {
+   return (
+-    <section className="hero">
+-      <span className="brand-badge">Trusted cannabis retail</span>
+-      <div>
++    <div className="home">
++      <section className="hero-section">
++        <span className="hero-badge">Verified cannabis retail</span>
+         <h1 className="hero-title">GreenHaus</h1>
+-        <p className="hero-description">
+-          GreenHaus brings compliant, age-verified cannabis retail to your
+-          fingertips. Discover curated menus, earn loyalty rewards, and check
+-          out in seconds with secure payment options that keep your data safe.
++        <p className="hero-subhead">
++          Verified cannabis retail. Rewards that stack. Pickup in seconds.
+         </p>
+-      </div>
+-      <div className="hero-actions">
+-        <a className="primary-button" href="#">
+-          Download the GreenHaus App
+-        </a>
+-        <div className="qr-card">
+-          <Image
+-            src="/qr-placeholder.svg"
+-            width={140}
+-            height={140}
+-            alt="QR code placeholder for the GreenHaus app download"
+-          />
+-          <p className="qr-caption">Scan to download when the app launches.</p>
++        <div className="hero-actions">
++          <a className="primary-button" href={DOWNLOAD_URL}>
++            Download the GreenHaus App
++          </a>
++          <div className="qr-card" role="group" aria-label="Download options">
++            <QR
++              url={DOWNLOAD_URL}
++              alt="QR code placeholder linking to the GreenHaus app download"
++            />
++            <p className="qr-caption">Scan or tap to download on launch.</p>
++          </div>
+         </div>
+-      </div>
+-      <div className="content-article">
+-        <section>
+-          <h2>Age-gated by design</h2>
+-          <p className="muted">
+-            Verified 21+ profiles unlock exclusive in-store offers and express
+-            pickup, giving customers a safe, legal shopping experience from
+-            entry to checkout.
++      </section>
++      <section
++        className="benefits-section"
++        aria-labelledby="benefits-heading"
++      >
++        <div className="section-intro">
++          <p className="eyebrow">Built for regulated retail</p>
++          <h2 id="benefits-heading" className="section-title">
++            Rewards that stack with compliance baked in.
++          </h2>
++          <p className="section-summary">
++            Modern cannabis retail needs express age verification, thoughtful
++            data practices, and partners who align with your operations. That’s
++            GreenHaus.
+           </p>
+-        </section>
+-        <section>
+-          <h2>Data handled responsibly</h2>
+-          <p className="muted">
+-            We collect only the information needed to personalize menus,
+-            fulfill orders, and keep the experience compliant in every
+-            jurisdiction we serve.
++        </div>
++        <div className="benefit-grid">
++          {benefits.map((benefit) => (
++            <article key={benefit.title} className="benefit-card">
++              <h3>{benefit.title}</h3>
++              <p>{benefit.copy}</p>
++            </article>
++          ))}
++        </div>
++      </section>
++      <section className="footer-cta" aria-labelledby="cta-heading">
++        <div className="footer-cta-card">
++          <p className="eyebrow">Stay in the loop</p>
++          <h2 id="cta-heading">Launch updates straight to your inbox.</h2>
++          <p>
++            We’re wrapping up the final touches. Drop your email inside the app
++            once it’s live and get rewarded for being first.
+           </p>
+-        </section>
+-        <section>
+-          <h2>Partners that grow with you</h2>
+-          <p className="muted">
+-            GreenHaus helps dispensaries deepen customer relationships with
+-            actionable insights, streamlined operations, and marketing support
+-            built for regulated markets.
+-          </p>
+-        </section>
+-      </div>
+-    </section>
++          <a className="secondary-button" href={DOWNLOAD_URL}>
++            Download the GreenHaus App
++          </a>
++        </div>
++      </section>
++    </div>
+   );
+ }
+--- /tmp/orig_globals.css
++++ app/globals.css
+@@ -1,10 +1,12 @@
+ :root {
+   color-scheme: only light;
+-  --brand-green: #22c55e;
+-  --text-primary: #111827;
+-  --text-secondary: #4b5563;
++  --brand-green: #16a34a;
++  --brand-dark: #0b1927;
+   --surface: #ffffff;
+-  --border-color: #e5e7eb;
++  --surface-muted: rgba(255, 255, 255, 0.6);
++  --text-primary: #0b1927;
++  --text-secondary: #415061;
++  --border-color: rgba(15, 23, 42, 0.08);
+   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+ }
+ 
+@@ -16,186 +18,402 @@
+ 
+ body {
+   margin: 0;
+-  font-family: var(--font-sans);
+-  background: var(--surface);
+-  color: var(--text-primary);
++  min-height: 100vh;
++  background:
++    radial-gradient(circle at top left, rgba(34, 197, 94, 0.18), transparent 55%),
++    radial-gradient(circle at bottom right, rgba(15, 23, 42, 0.12), transparent 45%),
++    #f1f5f9;
++  color: var(--text-primary);
++  font-family: var(--font-sans, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+   -webkit-font-smoothing: antialiased;
+ }
+ 
+ a {
+   color: inherit;
+-  text-decoration: none;
+ }
+ 
+ a:hover,
+ a:focus {
+-  text-decoration: underline;
+-  text-decoration-thickness: 2px;
+-  text-underline-offset: 4px;
++  text-decoration: none;
++}
++
++.skip-to-content {
++  position: absolute;
++  left: -9999px;
++  top: 1rem;
++  background: var(--brand-dark);
++  color: white;
++  padding: 0.75rem 1.25rem;
++  border-radius: 999px;
++  font-weight: 600;
++  z-index: 1000;
++}
++
++.skip-to-content:focus {
++  left: 1rem;
+ }
+ 
+ .app-shell {
+   min-height: 100vh;
+-  max-width: 720px;
++  width: min(100%, 960px);
+   margin: 0 auto;
+-  padding: 3rem 1.5rem 2.5rem;
++  padding: 3.5rem 1.5rem 3rem;
+   display: flex;
+   flex-direction: column;
+-  gap: 3rem;
++  gap: 4rem;
+ }
+ 
+ .site-main {
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+-  gap: 2rem;
+-}
+-
+-.site-footer {
+-  border-top: 1px solid var(--border-color);
+-  padding-top: 1.5rem;
++  gap: 4rem;
++}
++
++.home {
+   display: flex;
+   flex-direction: column;
+-  gap: 0.75rem;
++  gap: 4rem;
++}
++
++.hero-section {
++  position: relative;
++  display: grid;
++  gap: 1.75rem;
++  padding: 2.5rem 2.25rem;
++  border-radius: 1.75rem;
++  background: linear-gradient(135deg, rgba(11, 25, 39, 0.9), rgba(11, 25, 39, 0.78)), var(--brand-dark);
++  color: rgba(255, 255, 255, 0.88);
++  overflow: hidden;
++  box-shadow: 0 45px 80px -60px rgba(11, 25, 39, 0.8);
++}
++
++.hero-section::after {
++  content: "";
++  position: absolute;
++  inset: -40% auto auto -20%;
++  width: 320px;
++  height: 320px;
++  background: radial-gradient(circle, rgba(34, 197, 94, 0.35), transparent 70%);
++  filter: blur(0px);
++  z-index: 0;
++}
++
++.hero-badge {
++  justify-self: flex-start;
++  position: relative;
++  z-index: 1;
++  display: inline-flex;
++  align-items: center;
++  gap: 0.5rem;
++  padding: 0.45rem 0.9rem;
++  border-radius: 999px;
+   font-size: 0.9rem;
+-  color: var(--text-secondary);
+-}
+-
+-.site-footer nav {
+-  display: flex;
+-  gap: 1rem;
+-  flex-wrap: wrap;
+-}
+-
+-.footer-note {
+-  margin: 0;
+-}
+-
+-.hero {
+-  display: flex;
+-  flex-direction: column;
+-  gap: 1.75rem;
+-  text-align: left;
+-}
+-
+-.brand-badge {
+-  align-self: flex-start;
+-  background: rgba(34, 197, 94, 0.12);
+-  color: var(--brand-green);
+-  padding: 0.35rem 0.75rem;
+-  border-radius: 999px;
+   font-weight: 600;
+-  font-size: 0.9rem;
++  background: rgba(255, 255, 255, 0.14);
++  color: rgba(255, 255, 255, 0.9);
+ }
+ 
+ .hero-title {
+-  font-size: clamp(2.4rem, 5vw, 3.2rem);
+-  line-height: 1.1;
+-  margin: 0;
+-}
+-
+-.hero-description {
+-  margin: 0;
+-  font-size: 1.1rem;
++  margin: 0;
++  position: relative;
++  z-index: 1;
++  font-size: clamp(2.75rem, 7vw, 4.25rem);
++  letter-spacing: -0.025em;
++  line-height: 1.05;
++  color: white;
++}
++
++.hero-subhead {
++  margin: 0;
++  position: relative;
++  z-index: 1;
++  font-size: clamp(1.1rem, 3vw, 1.35rem);
+   line-height: 1.6;
+-  color: var(--text-secondary);
++  color: rgba(255, 255, 255, 0.78);
+ }
+ 
+ .hero-actions {
+-  display: grid;
+-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+-  gap: 1.5rem;
++  position: relative;
++  z-index: 1;
++  display: grid;
++  grid-template-columns: 1fr;
++  gap: 1.2rem;
+   align-items: center;
+ }
+ 
+-.primary-button {
++.primary-button,
++.secondary-button {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
++  gap: 0.5rem;
++  border-radius: 0.9rem;
++  font-weight: 600;
++  font-size: 1.05rem;
++  padding: 0.95rem 1.6rem;
++  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
++}
++
++.primary-button {
+   background: var(--brand-green);
+   color: white;
+-  padding: 0.85rem 1.5rem;
+-  border-radius: 0.75rem;
+-  font-weight: 600;
+-  font-size: 1rem;
+-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+-  box-shadow: 0 14px 30px -14px rgba(34, 197, 94, 0.5);
++  box-shadow: 0 25px 45px -25px rgba(22, 163, 74, 0.8);
+ }
+ 
+ .primary-button:hover,
+-.primary-button:focus {
++.primary-button:focus-visible {
+   transform: translateY(-1px);
+-  text-decoration: none;
+-  box-shadow: 0 16px 32px -14px rgba(34, 197, 94, 0.55);
++  box-shadow: 0 30px 55px -25px rgba(22, 163, 74, 0.9);
++}
++
++.secondary-button {
++  background: rgba(255, 255, 255, 0.1);
++  color: white;
++  border: 1px solid rgba(255, 255, 255, 0.25);
++}
++
++.secondary-button:hover,
++.secondary-button:focus-visible {
++  transform: translateY(-1px);
++  background: rgba(255, 255, 255, 0.18);
+ }
+ 
+ .qr-card {
+-  border: 1px solid var(--border-color);
+-  border-radius: 1rem;
+-  padding: 1.25rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 0.75rem;
+-  background: #f9fafb;
++  padding: 1.1rem;
++  border-radius: 1.25rem;
++  border: 1px solid rgba(255, 255, 255, 0.25);
++  background: rgba(15, 23, 42, 0.35);
++  backdrop-filter: blur(12px);
+ }
+ 
+ .qr-card img {
+-  width: 140px;
+-  height: 140px;
++  width: 154px;
++  height: 154px;
++  border-radius: 0.75rem;
++  background: white;
++  padding: 0.4rem;
+ }
+ 
+ .qr-caption {
++  margin: 0;
++  font-size: 0.9rem;
++  text-align: center;
++  color: rgba(255, 255, 255, 0.72);
++}
++
++.benefits-section {
++  display: grid;
++  gap: 2.5rem;
++}
++
++.section-intro {
++  display: grid;
++  gap: 1rem;
++  align-items: start;
++  max-width: 620px;
++}
++
++.section-title {
++  margin: 0;
++  font-size: clamp(1.75rem, 4vw, 2.35rem);
++  letter-spacing: -0.015em;
++  color: var(--text-primary);
++}
++
++.section-summary {
++  margin: 0;
++  font-size: 1.05rem;
++  line-height: 1.7;
++  color: var(--text-secondary);
++}
++
++.eyebrow {
++  margin: 0;
++  font-size: 0.85rem;
++  text-transform: uppercase;
++  letter-spacing: 0.2em;
++  color: var(--brand-green);
++  font-weight: 600;
++}
++
++.benefit-grid {
++  display: grid;
++  gap: 1.35rem;
++}
++
++.benefit-card {
++  display: grid;
++  gap: 0.75rem;
++  padding: 1.75rem 1.65rem;
++  border-radius: 1.25rem;
++  border: 1px solid var(--border-color);
++  background: var(--surface);
++  box-shadow: 0 12px 24px -18px rgba(15, 23, 42, 0.4);
++}
++
++.benefit-card h3 {
++  margin: 0;
++  font-size: 1.25rem;
++  letter-spacing: -0.01em;
++  color: var(--text-primary);
++}
++
++.benefit-card p {
++  margin: 0;
++  color: var(--text-secondary);
++  line-height: 1.65;
++}
++
++.footer-cta {
++  position: relative;
++  padding: 2.75rem;
++  border-radius: 1.75rem;
++  background: linear-gradient(135deg, rgba(22, 163, 74, 0.12), rgba(16, 185, 129, 0.1));
++  border: 1px solid rgba(22, 163, 74, 0.35);
++  overflow: hidden;
++}
++
++.footer-cta::after {
++  content: "";
++  position: absolute;
++  inset: auto -20% -60% auto;
++  width: 320px;
++  height: 320px;
++  background: radial-gradient(circle, rgba(22, 163, 74, 0.25), transparent 70%);
++}
++
++.footer-cta-card {
++  position: relative;
++  z-index: 1;
++  display: grid;
++  gap: 1rem;
++  max-width: 540px;
++}
++
++.footer-cta-card h2 {
++  margin: 0;
++  font-size: clamp(1.75rem, 4vw, 2.35rem);
++  letter-spacing: -0.01em;
++  color: var(--text-primary);
++}
++
++.footer-cta-card p {
++  margin: 0;
++  color: var(--text-secondary);
++  line-height: 1.65;
++}
++
++.site-footer {
++  border-top: 1px solid rgba(15, 23, 42, 0.12);
++  padding-top: 1.5rem;
++  display: flex;
++  flex-wrap: wrap;
++  justify-content: space-between;
++  gap: 0.75rem;
+   font-size: 0.95rem;
+   color: var(--text-secondary);
+-  margin: 0;
+-  text-align: center;
++}
++
++.site-footer nav {
++  display: flex;
++  gap: 1rem;
++  flex-wrap: wrap;
++}
++
++.footer-note {
++  margin: 0;
+ }
+ 
+ .content-article {
+-  display: flex;
+-  flex-direction: column;
+-  gap: 1.5rem;
+-  line-height: 1.65;
+-  font-size: 1rem;
++  display: grid;
++  gap: 1.75rem;
++  padding: 2.5rem 2rem;
++  border-radius: 1.5rem;
++  background: var(--surface);
++  border: 1px solid var(--border-color);
++  box-shadow: 0 18px 35px -28px rgba(15, 23, 42, 0.5);
++  line-height: 1.7;
++  font-size: 1.02rem;
++  color: var(--text-secondary);
+ }
+ 
+ .content-article h1 {
+-  font-size: 2rem;
+-  margin: 0;
++  margin: 0;
++  font-size: clamp(2rem, 5vw, 2.65rem);
++  color: var(--text-primary);
+ }
+ 
+ .content-article h2 {
+-  font-size: 1.2rem;
+-  margin-bottom: 0.35rem;
+-}
+-
+-.content-article section {
+-  display: flex;
+-  flex-direction: column;
+-  gap: 0.5rem;
++  margin: 0;
++  font-size: 1.35rem;
++  color: var(--text-primary);
++}
++
++.content-article p,
++.content-article li {
++  margin: 0;
++  color: var(--text-secondary);
+ }
+ 
+ .content-article ul {
+-  margin: 0;
+-  padding-left: 1.25rem;
+-}
+-
+-.content-article li {
+-  margin-bottom: 0.35rem;
++  padding-left: 1.2rem;
++  display: grid;
++  gap: 0.4rem;
+ }
+ 
+ .muted {
+   color: var(--text-secondary);
+ }
+ 
+-@media (max-width: 600px) {
++@media (min-width: 640px) {
++  .hero-actions {
++    grid-template-columns: repeat(2, minmax(0, 1fr));
++  }
++}
++
++@media (min-width: 768px) {
+   .app-shell {
+-    padding: 2.5rem 1.25rem 2rem;
+-    gap: 2.5rem;
++    padding: 4.5rem 2.5rem 3.5rem;
++  }
++
++  .hero-section {
++    grid-template-columns: repeat(2, minmax(0, 1fr));
++    align-items: center;
+   }
+ 
+   .hero-actions {
+-    grid-template-columns: 1fr;
+-  }
+-}
++    grid-template-columns: minmax(0, 1fr);
++    justify-items: start;
++  }
++
++  .benefit-grid {
++    grid-template-columns: repeat(3, minmax(0, 1fr));
++  }
++}
++
++@media (min-width: 1024px) {
++  .hero-actions {
++    grid-template-columns: max-content 1fr;
++  }
++
++  .primary-button,
++  .secondary-button {
++    font-size: 1.1rem;
++  }
++}
++
++@media (prefers-reduced-motion: reduce) {
++  *,
++  *::before,
++  *::after {
++    animation-duration: 0.01ms !important;
++    animation-iteration-count: 1 !important;
++    transition-duration: 0.01ms !important;
++    scroll-behavior: auto !important;
++  }
++}
+--- /tmp/orig_privacy.tsx
++++ app/privacy/page.tsx
+@@ -10,94 +10,55 @@
+       <h1>Privacy Policy</h1>
+       <p className="muted">Last updated: May 5, 2024</p>
+       <section>
+-        <h2>Who we are</h2>
++        <h2>How we protect your privacy</h2>
+         <p>
+-          GreenHaus operates a digital platform that connects verified adults
+-          with licensed cannabis retailers. We are committed to protecting your
+-          privacy and handling personal information in compliance with
+-          applicable cannabis and data protection regulations.
+-        </p>
+-      </section>
+-      <section>
+-        <h2>Age restrictions</h2>
+-        <p>
+-          Our services are intended only for adults of legal purchasing age in
+-          their jurisdiction (21+ in most U.S. states). We verify your age
+-          before granting access to menus, ordering, or loyalty features.
++          GreenHaus connects age-verified adults with licensed cannabis
++          retailers. We handle personal information only to deliver that service
++          responsibly and in line with cannabis regulations.
+         </p>
+       </section>
+       <section>
+         <h2>Information we collect</h2>
+-        <p>
+-          We collect the minimum data needed to deliver the GreenHaus experience
+-          and stay compliant. This may include:
+-        </p>
++        <p>We collect just enough to keep the experience safe and compliant:</p>
+         <ul>
+-          <li>Account details such as your name, email, and phone number.</li>
+-          <li>Government-issued ID or selfie used for one-time age verification.</li>
++          <li>Account details used to verify age and secure your profile.</li>
++          <li>Order history and loyalty activity so rewards stack correctly.</li>
+           <li>
+-            Order history, loyalty activity, and messages you exchange with
+-            retail partners.
++            Optional location details to surface nearby pickup and delivery.
+           </li>
+-          <li>
+-            Location data (with permission) to show nearby dispensaries and
+-            confirm delivery eligibility.
+-          </li>
+-          <li>
+-            Device and usage information that helps us secure accounts and
+-            monitor app performance.
+-          </li>
++          <li>Technical diagnostics that help us keep the platform stable.</li>
+         </ul>
+       </section>
+       <section>
+         <h2>How we use information</h2>
+         <ul>
+-          <li>Authenticate your account and maintain legal age compliance.</li>
+-          <li>Fulfill orders, process payments, and deliver customer support.</li>
+-          <li>
+-            Personalize menus, loyalty offers, and marketing communications that
+-            fit your preferences.
+-          </li>
+-          <li>
+-            Analyze anonymized trends to improve retailer operations and keep
+-            the platform secure.
+-          </li>
++          <li>Authenticate 21+ accounts and unlock compliant ordering flows.</li>
++          <li>Personalize menus and offers you actually want to see.</li>
++          <li>Power pickup, delivery, and support conversations with retailers.</li>
++          <li>Review anonymized insights to improve operations and security.</li>
+         </ul>
+       </section>
+       <section>
+-        <h2>Sharing with third parties</h2>
++        <h2>Sharing and retention</h2>
+         <p>
+-          We share personal data only with licensed retail partners, payment and
+-          age-verification providers, and other processors that enable the
+-          services you request. Each partner is contractually required to handle
+-          your data responsibly and only as instructed by GreenHaus.
+-        </p>
+-      </section>
+-      <section>
+-        <h2>Data retention &amp; security</h2>
+-        <p>
+-          We keep personal data only as long as necessary to provide services,
+-          meet legal obligations, and resolve disputes. We employ encryption,
+-          access controls, and routine monitoring to reduce the risk of
+-          unauthorized access.
++          We share data only with licensed retailers and trusted processors that
++          enable payments, age verification, and support. Partners are bound to
++          our privacy standards. Data is retained only as long as required to
++          provide the services or meet legal obligations.
+         </p>
+       </section>
+       <section>
+         <h2>Your choices</h2>
+-        <p>You can:</p>
+-        <ul>
+-          <li>Update or delete your account information from within the app.</li>
+-          <li>Adjust marketing preferences or opt out of promotional emails.</li>
+-          <li>
+-            Request a copy of your data or ask us to delete it, subject to legal
+-            retention requirements.
+-          </li>
+-        </ul>
++        <p>
++          Update, export, or request deletion of your profile from within the
++          GreenHaus app. You can also adjust marketing preferences or opt out of
++          promotional emails at any time.
++        </p>
+       </section>
+       <section>
+         <h2>Contact us</h2>
+         <p>
+-          Questions about this policy? Reach the GreenHaus privacy team at{" "}
++          Have questions? Reach the privacy team at{" "}
+           <a href="mailto:indieplantmarketing@gmail.com">
+             indieplantmarketing@gmail.com
+           </a>
+--- /tmp/orig_terms.tsx
++++ app/terms/page.tsx
+@@ -10,95 +10,51 @@
+       <h1>Terms of Service</h1>
+       <p className="muted">Last updated: May 5, 2024</p>
+       <section>
+-        <h2>Agreement to terms</h2>
++        <h2>Using GreenHaus</h2>
+         <p>
+-          By creating a GreenHaus account or accessing our mobile app, you agree
+-          to these Terms of Service and our Privacy Policy. If you do not accept
+-          the terms, do not use GreenHaus.
++          By creating an account or accessing the GreenHaus app, you agree to
++          these terms and the Privacy Policy. The service is for adults of legal
++          purchasing age only, and we verify that you are 21+ before unlocking
++          ordering features.
+         </p>
+       </section>
+       <section>
+-        <h2>Eligibility &amp; age verification</h2>
++        <h2>Your responsibilities</h2>
++        <ul>
++          <li>Share accurate information for account setup and age checks.</li>
++          <li>Keep login details secure and notify us if anything looks off.</li>
++          <li>Use the platform for personal, lawful purchases from licensed retailers.</li>
++        </ul>
++      </section>
++      <section>
++        <h2>Ordering with partners</h2>
+         <p>
+-          You must be of legal purchasing age in your jurisdiction (21+ in most
+-          U.S. states) and provide accurate information for verification. We may
+-          deny or suspend access if we cannot confirm your eligibility.
++          GreenHaus connects you with licensed dispensaries. Inventory, pricing,
++          and pickup or delivery windows come directly from those partners. A
++          completed order is an agreement between you and the retailer.
+         </p>
+       </section>
+       <section>
+-        <h2>Account responsibilities</h2>
+-        <ul>
+-          <li>
+-            Keep your login credentials confidential and notify us of any
+-            unauthorized use.
+-          </li>
+-          <li>
+-            Ensure your information stays current, including identification and
+-            payment details.
+-          </li>
+-          <li>
+-            Use GreenHaus only for personal, lawful cannabis purchases from
+-            licensed retailers.
+-          </li>
+-        </ul>
+-      </section>
+-      <section>
+-        <h2>Ordering &amp; fulfillment</h2>
++        <h2>Acceptable conduct</h2>
+         <p>
+-          GreenHaus facilitates orders between you and licensed retail partners.
+-          Inventory, pricing, pickup, and delivery policies are set by each
+-          retailer. A confirmed order is a contract between you and the
+-          retailer, not GreenHaus.
++          We expect respectful, compliant behavior. No attempts to bypass age
++          gates, tamper with the product, or harass dispensary teams. We may
++          limit or end access if policies are violated.
+         </p>
+       </section>
+       <section>
+-        <h2>Acceptable use</h2>
+-        <ul>
+-          <li>No unlawful resale, diversion, or transport across jurisdictional boundaries.</li>
+-          <li>No tampering with the platform, including attempts to bypass age gating.</li>
+-          <li>No abusive, discriminatory, or fraudulent activity toward retailers or staff.</li>
+-        </ul>
+-      </section>
+-      <section>
+-        <h2>Compliance &amp; risk</h2>
++        <h2>Disclaimers</h2>
+         <p>
+-          Cannabis laws differ by location and may change. You are responsible
+-          for understanding and complying with the laws that apply to your
+-          purchase and consumption. GreenHaus provides an informational and
+-          ordering service and does not cultivate, manufacture, or sell
+-          cannabis.
++          We provide GreenHaus “as is.” Cannabis laws shift quickly, and it’s up
++          to you to understand local regulations. We are not liable for indirect
++          or consequential damages tied to the service.
+         </p>
+       </section>
+       <section>
+-        <h2>Disclaimer &amp; limitation of liability</h2>
++        <h2>Changes and contact</h2>
+         <p>
+-          Services are provided on an &ldquo;as is&rdquo; basis. We make no
+-          warranties regarding availability, accuracy, or suitability for a
+-          particular purpose. To the fullest extent permitted by law, GreenHaus
+-          is not liable for indirect, incidental, or consequential damages
+-          arising from your use of the platform.
+-        </p>
+-      </section>
+-      <section>
+-        <h2>Termination</h2>
+-        <p>
+-          We may suspend or terminate access at any time for suspected policy
+-          violations or legal requirements. You may close your account at any
+-          time through the app or by contacting support.
+-        </p>
+-      </section>
+-      <section>
+-        <h2>Changes to these terms</h2>
+-        <p>
+-          We may update these terms to reflect operational or legal changes. We
+-          will notify you of material updates through the app or via email. Your
+-          continued use after the effective date constitutes acceptance.
+-        </p>
+-      </section>
+-      <section>
+-        <h2>Contact</h2>
+-        <p>
+-          For questions about these terms, email{" "}
++          We may update these terms as we launch new features or respond to
++          legal changes. We’ll note the effective date above. Questions? Email{" "}
+           <a href="mailto:indieplantmarketing@gmail.com">
+             indieplantmarketing@gmail.com
+           </a>
+--- /tmp/orig_package.json
++++ package.json
+@@ -10,11 +10,13 @@
+   },
+   "dependencies": {
+     "next": "^14.2.3",
++    "qrcode": "^1.5.4",
+     "react": "^18.2.0",
+     "react-dom": "^18.2.0"
+   },
+   "devDependencies": {
+     "@types/node": "^20.12.7",
++    "@types/qrcode": "^1.5.5",
+     "@types/react": "^18.2.47",
+     "@types/react-dom": "^18.2.18",
+     "eslint": "^8.57.0",
+--- /dev/null
++++ components/QR.tsx
+@@ -0,0 +1,38 @@
++import Image from "next/image";
++import QRCode from "qrcode";
++
++type QRProps = {
++  url: string;
++  alt: string;
++  size?: number;
++  className?: string;
++};
++
++export default async function QR({
++  url,
++  alt,
++  size = 156,
++  className
++}: QRProps) {
++  const dataUrl = await QRCode.toDataURL(url, {
++    width: size,
++    margin: 1,
++    color: {
++      dark: "#0b1927ff",
++      light: "#ffffffff"
++    }
++  });
++
++  return (
++    <Image
++      src={dataUrl}
++      alt={alt}
++      width={size}
++      height={size}
++      className={className}
++      loading="lazy"
++      unoptimized
++      sizes={`${size}px`}
++    />
++  );
++}

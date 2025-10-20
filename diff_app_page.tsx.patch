@@ -1,0 +1,133 @@
+--- /tmp/orig_app_page.tsx
++++ app/page.tsx
+@@ -1,57 +1,83 @@
+-import Image from "next/image";
++import QR from "../components/QR";
++
++const DOWNLOAD_URL = "#";
++const benefits = [
++  {
++    title: "Age-gated by design",
++    copy:
++      "21+ profiles unlock exclusive offers and express pickup in a secure, compliant flow."
++  },
++  {
++    title: "Data handled responsibly",
++    copy:
++      "Only what’s needed to personalize menus, fulfill orders, and keep you compliant."
++  },
++  {
++    title: "Partners that grow with you",
++    copy:
++      "Insights, operations, and marketing support built for regulated markets."
++  }
++];
+ 
+ export default function HomePage() {
+   return (
+-    <section className="hero">
+-      <span className="brand-badge">Trusted cannabis retail</span>
+-      <div>
++    <div className="home">
++      <section className="hero-section">
++        <span className="hero-badge">Verified cannabis retail</span>
+         <h1 className="hero-title">GreenHaus</h1>
+-        <p className="hero-description">
+-          GreenHaus brings compliant, age-verified cannabis retail to your
+-          fingertips. Discover curated menus, earn loyalty rewards, and check
+-          out in seconds with secure payment options that keep your data safe.
++        <p className="hero-subhead">
++          Verified cannabis retail. Rewards that stack. Pickup in seconds.
+         </p>
+-      </div>
+-      <div className="hero-actions">
+-        <a className="primary-button" href="#">
+-          Download the GreenHaus App
+-        </a>
+-        <div className="qr-card">
+-          <Image
+-            src="/qr-placeholder.svg"
+-            width={140}
+-            height={140}
+-            alt="QR code placeholder for the GreenHaus app download"
+-          />
+-          <p className="qr-caption">Scan to download when the app launches.</p>
++        <div className="hero-actions">
++          <a className="primary-button" href={DOWNLOAD_URL}>
++            Download the GreenHaus App
++          </a>
++          <div className="qr-card" role="group" aria-label="Download options">
++            <QR
++              url={DOWNLOAD_URL}
++              alt="QR code placeholder linking to the GreenHaus app download"
++            />
++            <p className="qr-caption">Scan or tap to download on launch.</p>
++          </div>
+         </div>
+-      </div>
+-      <div className="content-article">
+-        <section>
+-          <h2>Age-gated by design</h2>
+-          <p className="muted">
+-            Verified 21+ profiles unlock exclusive in-store offers and express
+-            pickup, giving customers a safe, legal shopping experience from
+-            entry to checkout.
++      </section>
++      <section
++        className="benefits-section"
++        aria-labelledby="benefits-heading"
++      >
++        <div className="section-intro">
++          <p className="eyebrow">Built for regulated retail</p>
++          <h2 id="benefits-heading" className="section-title">
++            Rewards that stack with compliance baked in.
++          </h2>
++          <p className="section-summary">
++            Modern cannabis retail needs express age verification, thoughtful
++            data practices, and partners who align with your operations. That’s
++            GreenHaus.
+           </p>
+-        </section>
+-        <section>
+-          <h2>Data handled responsibly</h2>
+-          <p className="muted">
+-            We collect only the information needed to personalize menus,
+-            fulfill orders, and keep the experience compliant in every
+-            jurisdiction we serve.
++        </div>
++        <div className="benefit-grid">
++          {benefits.map((benefit) => (
++            <article key={benefit.title} className="benefit-card">
++              <h3>{benefit.title}</h3>
++              <p>{benefit.copy}</p>
++            </article>
++          ))}
++        </div>
++      </section>
++      <section className="footer-cta" aria-labelledby="cta-heading">
++        <div className="footer-cta-card">
++          <p className="eyebrow">Stay in the loop</p>
++          <h2 id="cta-heading">Launch updates straight to your inbox.</h2>
++          <p>
++            We’re wrapping up the final touches. Drop your email inside the app
++            once it’s live and get rewarded for being first.
+           </p>
+-        </section>
+-        <section>
+-          <h2>Partners that grow with you</h2>
+-          <p className="muted">
+-            GreenHaus helps dispensaries deepen customer relationships with
+-            actionable insights, streamlined operations, and marketing support
+-            built for regulated markets.
+-          </p>
+-        </section>
+-      </div>
+-    </section>
++          <a className="secondary-button" href={DOWNLOAD_URL}>
++            Download the GreenHaus App
++          </a>
++        </div>
++      </section>
++    </div>
+   );
+ }
