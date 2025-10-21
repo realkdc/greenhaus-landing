@@ -16,7 +16,7 @@ export default function SupportPage() {
       <section>
         <h2>Get Help</h2>
         <p>
-          We're here to help you with any questions or issues you might have with GreenHaus. 
+          We&apos;re here to help you with any questions or issues you might have with GreenHaus. 
           Our support team is available to assist with account setup, ordering, and technical issues.
         </p>
       </section>
@@ -27,7 +27,7 @@ export default function SupportPage() {
           <h3>How do I create an account?</h3>
           <p>
             Download the GreenHaus app and follow the age verification process. 
-            You'll need to provide valid identification to confirm you're 21 or older.
+            You&apos;ll need to provide valid identification to confirm you&apos;re 21 or older.
           </p>
         </div>
         
@@ -81,20 +81,20 @@ export default function SupportPage() {
           <a href={`mailto:${SUPPORT_EMAIL}`}>
             {SUPPORT_EMAIL}
           </a>
-          {" "}and we'll get back to you within 24 hours.
+          {" "}and we&apos;ll get back to you within 24 hours.
         </p>
         <p>
           For urgent issues, please include your account email and a brief 
-          description of the problem you're experiencing.
+          description of the problem you&apos;re experiencing.
         </p>
       </section>
 
       <section>
         <h2>Feedback</h2>
         <p>
-          We're always working to improve GreenHaus. If you have suggestions 
+          We&apos;re always working to improve GreenHaus. If you have suggestions 
           for new features or ways we can make the experience better, 
-          we'd love to hear from you at{" "}
+          we&apos;d love to hear from you at{" "}
           <a href={`mailto:${SUPPORT_EMAIL}`}>
             {SUPPORT_EMAIL}
           </a>
