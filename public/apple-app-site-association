@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["4QHPER247K.com.greenhaus.customer"],
+        "paths": [ "/open/*", "/auth/*", "/magic/*", "/login/*", "/" ]
+      }
+    ]
+  }
+}
