@@ -71,6 +71,7 @@ export default function RootLayout({
             <nav aria-label="Legal">
               <Link href="/privacy">Privacy Policy</Link>
               <Link href="/terms">Terms of Service</Link>
+              <Link href="/support">Support</Link>
             </nav>
             <p className="footer-note">
               © {new Date().getFullYear()} GreenHaus. All rights reserved.
