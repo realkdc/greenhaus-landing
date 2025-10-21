@@ -2,20 +2,10 @@
 
 import { useEffect } from "react";
 
-export async function generateStaticParams() {
-  return [
-    { path: [] },
-    { path: ["auth"] },
-    { path: ["magic"] },
-    { path: ["login"] }
-  ];
-}
-
-export default function OpenPage() {
-
+export default function OpenAuthPage() {
   useEffect(() => {
-    // Try to open the app with the greenhaus://open scheme
-    const appUrl = "greenhaus://open";
+    // Try to open the app with the greenhaus://open/auth scheme
+    const appUrl = "greenhaus://open/auth";
     
     // Create a hidden iframe to attempt the app launch
     const iframe = document.createElement("iframe");
@@ -49,7 +39,7 @@ export default function OpenPage() {
       padding: "2rem",
       textAlign: "center"
     }}>
-      <h1>Opening GreenHaus...</h1>
+      <h1>Opening GreenHaus Auth...</h1>
       <p>If the app doesn&apos;t open automatically, <a href="/coming-soon">click here</a>.</p>
     </div>
   );
