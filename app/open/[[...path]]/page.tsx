@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 export default function OpenPage() {
-  const router = useRouter();
 
   useEffect(() => {
     // Try to open the app with the greenhaus://open scheme
