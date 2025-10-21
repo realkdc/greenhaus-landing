@@ -51,7 +51,6 @@ export default function HomePage() {
               <a 
                 className="primary-button" 
                 href={DOWNLOAD_URL}
-                {...(!hasAppLink && { "aria-disabled": "true", style: { pointerEvents: "none", opacity: 0.6 } })}
               >
                 Download the GreenHaus App
               </a>
@@ -124,7 +123,6 @@ export default function HomePage() {
           <a 
             className="secondary-button" 
             href={DOWNLOAD_URL}
-            {...(!hasAppLink && { "aria-disabled": "true", style: { pointerEvents: "none", opacity: 0.6 } })}
           >
             Download the GreenHaus App
           </a>
