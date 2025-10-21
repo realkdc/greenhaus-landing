@@ -2,6 +2,15 @@
 
 import { useEffect } from "react";
 
+export async function generateStaticParams() {
+  return [
+    { path: [] },
+    { path: ["auth"] },
+    { path: ["magic"] },
+    { path: ["login"] }
+  ];
+}
+
 export default function OpenPage() {
 
   useEffect(() => {
